@@ -1,0 +1,261 @@
+
+
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
+
+       
+
+public class multipleFieldsCustomization {
+
+
+    
+    public static void main(String[] args) throws IOException {
+       
+        // String fileName = "C:/Users/rkand/Desktop/exampl";  
+        //  FileWriter fileWriter = new FileWriter(fileName);   
+         
+
+       
+        
+       
+        // Path to the CSV file
+        String csvFilePath = "C:/Users/rkand/Desktop/input.csv";
+        List<String> lines = readCsvLines(csvFilePath);
+        // String a=printLines(lines);
+        System.out.println(printLines(lines));
+
+        // fileWriter.write(a);
+    }
+
+    public static List<String> readCsvLines(String filePath) {
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return lines;
+    }
+
+    public static String printLines(List<String> lines) {
+        StringBuilder xmlBuilder = new StringBuilder();
+        //StringBuilder xmlContents=new StringBuilder();
+        // String xmlContents = "<frame3>\n"
+        //     + "    <GroupInfo>\n"
+        //     + "        <Group Id=\"Group2393143240115531325\">\n"
+        //     + "            <Control name=\"label1\" value=\"3\" />\n"
+        //     + "            <Control name=\"textbox5\" value=\"3\" />\n"
+        //     + "            <Control name=\"textbox6\" value=\"3\" />\n"
+        //     + "            <Control name=\"textbox7\" value=\"3\" />\n"
+        //     + "        </Group>\n"
+        //     + "    </GroupInfo>\n"
+        //     + "    <Frame FrameId=\"frame3\" SectionTheme=\"\" ControlType=\"frame\" Caption=\"section\" FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" SectionBackColor=\"\" FontFamily=\"\" Enable=\"true\" DataOnDemand=\"N\" ColumnLayout=\"1\" BorderColor=\"\" Grouping=\"1\" MergeSection=\"1\" ReadOnlyStyle=\"N\" Summary=\"\" CustomId=\"\" CombinedFontWeight=\"Regular\" FrameState=\"false\" FrameVisible=\"false\" GridLayout=\"false\" GridLayoutInputLabel=\"FFFFFF\" GridLayoutBorderColor=\"FFFFFF\">\n";
+
+        // String xmlContents = "<frame3>\n"
+        //     + "    <GroupInfo>\n"
+        //     + "        <Group Id=\"Group2393143240115531325\">\n"
+        //     + "            <Control name=\"label1\" value=\"3\" />\n"
+        //     + "            <Control name=\"textbox5\" value=\"3\" />\n"
+        //     + "            <Control name=\"textbox6\" value=\"3\" />\n"
+        //     + "            <Control name=\"textbox7\" value=\"3\" />\n"
+        //     + "        </Group>\n"
+        //     + "    </GroupInfo>\n"
+        //     + "    <Frame FrameId=\"frame3\" SectionTheme=\"\" ControlType=\"frame\" Caption=\"section\" FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" SectionBackColor=\"\" FontFamily=\"\" Enable=\"true\" DataOnDemand=\"N\" ColumnLayout=\"1\" BorderColor=\"\" Grouping=\"1\" MergeSection=\"1\" ReadOnlyStyle=\"N\" Summary=\"\" CustomId=\"\" CombinedFontWeight=\"Regular\" FrameState=\"false\" FrameVisible=\"false\" GridLayout=\"false\" GridLayoutInputLabel=\"FFFFFF\" GridLayoutBorderColor=\"FFFFFF\">";
+
+        
+
+
+        //     xmlBuilder.append(xmlContents);
+        // String xmlBaseContent = "    <Event>\n"
+        //     + "        <Events />\n"
+        //     + "    </Event>\n"
+        //     + "    </Frame>\n"
+        //     + "</frame3>";
+
+        String xmlString12 = "<frame8>\n" +
+    "\t<GroupInfo/>\n" +
+    "\t<Frame FrameId=\"frame8\" SectionTheme=\"\" ControlType=\"frame\" Caption=\"Addsection\" FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" SectionBackColor=\"\" FontFamily=\"\" Enable=\"true\" DataOnDemand=\"N\" ColumnLayout=\"1\" BorderColor=\"\" Grouping=\"1\" MergeSection=\"1\" ReadOnlyStyle=\"N\" Summary=\"\" CustomId=\"\" CombinedFontWeight=\"Regular\" FrameState=\"false\" FrameVisible=\"false\" GridLayout=\"false\" GridLayoutInputLabel=\"FFFFFF\" GridLayoutBorderColor=\"FFFFFF\">\n" ;
+    
+
+    String xmlString123 = "<Event>\n" +
+    "\t<Event/>\n" +
+    "</Event>\n" +
+    "</Frame>\n" +
+    "</frame8>";
+    xmlBuilder.append(xmlString12);
+        
+      
+
+
+        for (String line : lines) {
+            xmlBuilder.append(separator(line));
+        }
+
+        // xmlBuilder.append(xmlBaseContent);
+
+        
+        xmlBuilder.append(xmlString123);
+
+        return xmlBuilder.toString();
+    }
+    public static String separator(String line){
+
+        List<String> lists=new ArrayList<String>();
+        String[] strArray = line.split(",");
+        lists.addAll(Arrays.asList(strArray));
+
+       if(lists.size()==1){
+        lists.add(1,"");
+
+       }
+
+        
+        return xml(lists.get(0),lists.get(1));
+        
+        
+
+    }
+
+    public static String xml(String a,String b){
+
+
+        // System.out.println(a);
+        // System.out.println(b);
+        StringBuilder app=new StringBuilder();
+    
+
+        String customControlId = a;
+        String customControlType = a;
+        String customControlLabel = b;
+        String xmlStringsss;
+
+        // XML string with placeholders
+        // String xmlContent = "<Control ControlId=\"" + customControlId + "\" ControlType=\"" + customControlType + "\" ControlLabel=\"" + customControlLabel + "\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\">\n" +
+        //         "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" ValidationMessage=\"Missing or Invalid Value\" Visible=\"true\" ReadOnly=\"false\" Enable=\"true\" Grouping=\"1\" DisableMaxLength=\"false\" BorderColor=\"\" BorderWidth=\"\" ControlStyle=\"\" MergeSection=\"1\" MaskingValue=\"nomasking\" FormattedValue=\"N\" RangeMax=\"0\" RangeMin=\"0\" TypeOfValue=\"\" Precision=\"\" SaveEncrypted=\"N\" MaxLength=\"\" Alphabets=\"true\" Spaces=\"true\" Numerals=\"true\" SpecialCharacters=\"\" Pattern=\"\" LabelFontSize=\"\" LabelFontWeight=\"\" LabelFontFamily=\"\" LabelBackgoundColor=\"\" LabelFontColor=\"\" LabelInputRatio=\"\" ToolTip=\"\" Summary=\"\" ReadOnlyStyle=\"N\" AllowSpecialChars=\"Y\" validateMandatoryDisable=\"N\" CharacterSet=\"0\" AllowCopy=\"0\" AllowPaste=\"0\" LabelInputAlignment=\"-1\" CustomId=\"\" LabelAsLink=\"N\" TextAlignment=\"\" MaxValue=\"\" MinValue=\"\" PlaceHolder=\"\" CombinedFontWeight=\"Bold\" />\n" +
+        //         "\t<Event>\n" +
+        //         "\t\t<Events />\n" +
+        //         "\t</Event>\n" +
+        //         "\t<DataClass Name=\"\" />\n" +
+        //         "</Control>";
+        if(a.equals("textbox")){
+        xmlStringsss = String.format(
+            "<Control ControlId=\"%s\" ControlType=\"%s\" ControlLabel=\"%s\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\">\n" +
+            "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" ValidationMessage=\"Missing or Invalid Value\" Visible=\"true\" ReadOnly=\"false\" Enable=\"true\" Grouping=\"1\" DisableMaxLength=\"false\" BorderColor=\"\" BorderWidth=\"\" ControlStyle=\"\" MergeSection=\"1\" MaskingValue=\"nomasking\" FormattedValue=\"N\" RangeMax=\"0\" RangeMin=\"0\" TypeOfValue=\"\" Precision=\"\" SaveEncrypted=\"N\" MaxLength=\"\" Alphabets=\"true\" Spaces=\"true\" Numerals=\"true\" SpecialCharacters=\"\" Pattern=\"\" LabelFontSize=\"\" LabelFontWeight=\"\" LabelFontFamily=\"\" LabelBackgoundColor=\"\" LabelFontColor=\"\" LabelInputRatio=\"\" ToolTip=\"\" Summary=\"\" ReadOnlyStyle=\"N\" AllowSpecialChars=\"Y\" validateMandatoryDisable=\"N\" CharacterSet=\"0\" AllowCopy=\"0\" AllowPaste=\"0\" LabelInputAlignment=\"-1\" CustomId=\"\" LabelAsLink=\"N\" TextAlignment=\"\" MaxValue=\"\" MinValue=\"\" PlaceHolder=\"\" CombinedFontWeight=\"Bold\"/>\n" +
+            "\t<Event>\n" +
+            "\t\t<Events/>\n" +
+            "\t</Event>\n" +
+            "\t<DataClass Name=\"\"/>\n" +
+            "</Control>",
+            customControlId, customControlType, customControlLabel
+        );
+        app.append(xmlStringsss);
+
+
+        }
+        else if(a.equals("combo")){
+            xmlStringsss = String.format(
+            "<Control ControlId=\"%s\" ControlType=\"%s\" ControlLabel=\"%s\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\" SaveValueType=\"\">\n" +
+            "\t<Options/>\n" +
+            "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" Visible=\"true\" HideSelectAll=\"false\" HideSearchBox=\"false\" ReadOnly=\"false\" Enable=\"true\" ValidationMessage=\"Missing or Invalid Value\" SortingOrder=\"0\" ComboType=\"\" CharVisibleOnOption=\"\" ListSize=\"\" BorderColor=\"\" BorderWidth=\"\" ControlStyle=\"\" Grouping=\"1\" MergeSection=\"1\" LabelFontSize=\"\" LabelFontWeight=\"\" LabelFontFamily=\"\" LabelBackgoundColor=\"\" LabelFontColor=\"\" ToolTip=\"\" Summary=\"\" LabelInputRatio=\"\" LabelInputAlignment=\"-1\" ReadOnlyStyle=\"N\" validateMandatoryDisable=\"N\" CustomId=\"\" CombinedFontWeight=\"Bold\"/>\n" +
+            "\t<Event>\n" +
+            "\t\t<Events/>\n" +
+            "\t</Event>\n" +
+            "\t<DataClass Name=\"\"/>\n" +
+            "</Control>",
+            customControlId, customControlType, customControlLabel
+        );
+        app.append(xmlStringsss);
+		
+
+        }
+        else if(a.equals("checkbox")){
+            xmlStringsss = String.format(
+            "<Control ControlId=\"%s\" ControlType=\"%s\" ControlLabel=\"%s\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\">\n" +
+            "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" ValidationMessage=\"Missing or Invalid Value\" Visible=\"true\" ReadOnly=\"false\" Enable=\"true\" BorderColor=\"\" BorderWidth=\"\" ControlStyle=\"\" Grouping=\"1\" MergeSection=\"1\" VerticalAlignment=\"\" ToolTip=\"\" Summary=\"\" CustomId=\"\" validateMandatoryDisable=\"N\" ReadOnlyStyle=\"N\" CombinedFontWeight=\"Bold\"/>\n" +
+            "\t<Event>\n" +
+            "\t\t<Events/>\n" +
+            "\t</Event>\n" +
+            "\t<DataClass Name=\"\"/>\n" +
+            "</Control>",
+            customControlId, customControlType, customControlLabel
+        );
+        app.append(xmlStringsss);
+
+        }
+
+        else if(a.equals("datepick")){
+            xmlStringsss = String.format(
+            "<Control ControlId=\"%s\" ControlType=\"%s\" ControlLabel=\"%s\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\">\n" +
+            "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" ValidationMessage=\"Missing or Invalid Value\" Visible=\"true\" ReadOnly=\"false\" Enable=\"true\" MinDateAsCurrent=\"false\" MaxDateAsCurrent=\"false\" BorderColor=\"\" BorderWidth=\"\" ControlStyle=\"\" TextAlignment=\"\" PickerType=\"1\" OpenPicker=\"1\" SelectPicker=\"\" Grouping=\"1\" MergeSection=\"1\" MinDate=\"\" MaxDate=\"\" LabelFontSize=\"\" LabelFontWeight=\"\" LabelFontFamily=\"\" LabelBackgoundColor=\"\" LabelFontColor=\"\" TimeZone=\"false\" ToolTip=\"\" Summary=\"\" LabelInputRatio=\"\" LabelInputAlignment=\"-1\" ReadOnlyStyle=\"N\" validateMandatoryDisable=\"N\" CustomId=\"\" DefaultValue=\"\" CombinedFontWeight=\"Bold\" DefaultHijriView=\"1\"/>\n" +
+            "\t<Event>\n" +
+            "\t\t<Events/>\n" +
+            "\t</Event>\n" +
+            "\t<DataClass Name=\"\"/>\n" +
+            "</Control>",
+            customControlId, customControlType, customControlLabel
+        );
+        app.append(xmlStringsss);
+
+        }
+        else if(a.equals("label")){
+            xmlStringsss = String.format(
+            "<Control ControlId=\"%s\" ControlType=\"%s\" ControlLabel=\"%s\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\">\n" +
+            "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" Visible=\"true\" ReadOnly=\"false\" Enable=\"true\" MergeSection=\"1\" Grouping=\"1\" TextAlignment=\"\" LinkURL=\"\" Link=\"1\" SubSection=\"N\" CustomId=\"\" CombinedFontWeight=\"Bold\"/>\n" +
+            "\t<DataClass Name=\"\"/>\n" +
+            "</Control>",
+            customControlId, customControlType, customControlLabel
+        );
+        app.append(xmlStringsss);
+
+        }
+        else if(a.equals("textarea")){
+            xmlStringsss = String.format(
+                "<Control ControlId=\"%s\" ControlType=\"%s\" ControlLabel=\"%s\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\">\n" +
+                "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" ValidationMessage=\"Missing or Invalid Value\" Visible=\"true\" ReadOnly=\"false\" Enable=\"true\" TextAlignment=\"\" Rows=\"3\" MaximumChar=\"100\" MaxLength=\"\" BorderColor=\"\" BorderWidth=\"\" ControlStyle=\"\" CombinedFontWeight=\"Bold\" Grouping=\"1\" RichText=\"1\" MergeSection=\"1\" TypeOfValue=\"\" Precision=\"\" DisableMaxLength=\"false\" LabelFontSize=\"\" LabelFontWeight=\"\" LabelFontFamily=\"\" LabelBackgoundColor=\"\" LabelFontColor=\"\" ToolTip=\"\" AllowSpecialChars=\"Y\" Summary=\"\" ReadOnlyStyle=\"N\" CharacterSet=\"0\" AllowCopy=\"0\" AllowPaste=\"0\" LabelInputRatio=\"\" LabelInputAlignment=\"-1\" validateMandatoryDisable=\"N\" CustomId=\"\" Alphabets=\"true\" Spaces=\"true\" Numerals=\"true\" SpecialCharacters=\"\" PlaceHolder=\"\"/>\n" +
+                "\t<Event>\n" +
+                "\t\t<Events/>\n" +
+                "\t</Event>\n" +
+                "\t<DataClass Name=\"\"/>\n" +
+                "</Control>",
+                customControlId, customControlType, customControlLabel
+            ); 
+            app.append(xmlStringsss);
+
+        }
+        else if(a.equals("radio")){
+            xmlStringsss = String.format(
+            "<Control ControlId=\"%s\" ControlType=\"%s\" ControlLabel=\"%s\" DataType=\"1\" Title=\"\" GroupId=\"\" Identifier=\"false\">\n" +
+            "\t<Options/>\n" +
+            "\t<Style FontStyle=\"\" FontWeight=\"\" FontSize=\"\" FontColor=\"\" BackColor=\"\" FontFamily=\"\" Mandatory=\"false\" ValidationMessage=\"Missing or Invalid Value\" Visible=\"true\" ReadOnly=\"false\" Enable=\"true\" BorderColor=\"\" BorderWidth=\"\" ControlStyle=\"\" Allignment=\"1\" Grouping=\"1\" MergeSection=\"1\" LabelFontSize=\"\" LabelFontWeight=\"\" LabelFontFamily=\"\" LabelBackgoundColor=\"\" LabelFontColor=\"\" LabelInputRatio=\"\" LabelInputAlignment=\"-1\" VerticalAlignment=\"\" ToolTip=\"\" Summary=\"\" ReadOnlyStyle=\"N\" validateMandatoryDisable=\"N\" CustomId=\"\" CombinedFontWeight=\"Bold\"/>\n" +
+            "\t<Event>\n" +
+            "\t\t<Events/>\n" +
+            "\t</Event>\n" +
+            "\t<DataClass Name=\"\"/>\n" +
+            "</Control>",
+            customControlId, customControlType, customControlLabel
+        );
+        app.append(xmlStringsss);
+        }
+            
+            
+          
+
+
+
+return app.toString();
+
+
+    }
+}
